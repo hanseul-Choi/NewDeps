@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- https://developer.android.com/guide/topics/manifest/manifest-intro?hl=ko -->
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewDeps"
         tools:targetApi="31">
+        <!--
+            Manifest에서는 앱의 4대 컴포넌트(Activity, Service, BroadcastReceiver, Contents Provider),
+            권한, 기기 호환성 등을 등록합니다. => 4대 컴포넌트의 등록 이유는 컴포넌트의 생명주기를 시스템에 등록하기 위함
+            시스템은 Android Manifest 파일을 통해 시작점, 혹은 클래스의 특징들을 분석하고 알맞게 실행함
+
+            exported 옵션의 경우, 외부에서도 보여도 괜찮은 클래스인지 확인 => 점점 보안의 이슈가 강해짐
+
+            intent-filter는 구성요소의 각 기능을 설명함
+        -->
         <activity
             android:name=".MainActivity"
             android:exported="true">

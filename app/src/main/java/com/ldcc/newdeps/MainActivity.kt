@@ -4,6 +4,36 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 /**
+ *  build-logic
+ *  https://proandroiddev.com/single-source-of-truth-for-your-build-scripts-72d584534949
+ *
+ *  build script의 보일러 플레이트 코드를 줄이면서 진행하는 것이 요즘 큰 주제이다.
+ *
+ *  - plugin : plugin 사용 관련 정보만 담음
+ *  - dependencies : 많이 변동이 많은 곳(이곳 관리가 중요할 수 있음)
+ *
+ *  Modularization이 적용되면서 모듈마다의 종속성(버전)관리가 중요해졌음 => version Catalog를 추천
+ *
+ *  version catalog : 의존성 리스트, 의존성 정의해 놓으면 사용자가 선택하는 형태
+ *    - 의존성 쉽게 주입 가능
+ *    - 빌드 중앙 관리 가능
+ *    - 의존성 그룹으로 관리 가능
+ *    - 그룹화를 통해 맞춤형 버전 관리 가능
+ *
+ *  1. gradle 밑에 libs.version.toml 파일 제작
+ *    1-1. [versions] : version 선언
+ *    1-2. [libraries] : alias 선언
+ *    1-3. [bundles] : dependency bundles 선언
+ *    1-4. [plugins] : plugin 선언
+ *
+ *  group은 간단하게 2개로 나눌 수 있음
+ *  - android-specific
+ *  - 3-rd party (kotlin-specific)
+ *
+ *  buildSrc는 out-of-date가 자주되어 빌드시 문제가 조금 있음
+ *
+ *
+ *
  *  https://developer.android.com/guide/components/fundamentals?hl=ko
  *
  *  Android?

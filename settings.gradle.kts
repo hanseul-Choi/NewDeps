@@ -1,4 +1,5 @@
 pluginManagement {
+//    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -13,4 +14,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NewDeps"
-include ':app'
+include(":app")
+include(":build-logic")

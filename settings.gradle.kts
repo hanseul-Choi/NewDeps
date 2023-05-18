@@ -1,11 +1,12 @@
 pluginManagement {
-//    includeBuild("build-logic")
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -13,6 +14,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "NewDeps"
 include(":app")
-include(":build-logic")
+include(":core")
+include(":core:ui")

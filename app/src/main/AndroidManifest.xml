@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    <?xml version="1.0" encoding="utf-8"?> : xml의 선언부, 인코딩 요소를 설정
+    xmlns? xml의 import 기능, 해당 위치의 라이브러리를 :다음의 변수로 사용한다는 의미
+    참고 : https://stackoverflow.com/questions/7119359/why-this-line-xmlnsandroid-http-schemas-android-com-apk-res-android-must-be
+    schemas는 url이 아니고 uri이다. 그러므로 웹에서는 해당 페이지가 안뜬다
+-->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 

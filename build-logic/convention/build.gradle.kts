@@ -12,6 +12,7 @@ java {
 dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+//    compileOnly(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
@@ -34,6 +35,11 @@ gradlePlugin {
         register("androidCompose") {
             id = "newdeps.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
+        }
+
+        register("androidHilt") {
+            id = "newdeps.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
         }
         //Here is the place to register plugins
 //        register()

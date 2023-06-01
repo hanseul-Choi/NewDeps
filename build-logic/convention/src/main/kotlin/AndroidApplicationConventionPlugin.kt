@@ -10,6 +10,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.android.application")
+//                apply("com.google.devtools.ksp")
             }
 
             // ApplicationExtension : Android Application Module에서만 동작한다

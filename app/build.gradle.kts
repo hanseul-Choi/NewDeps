@@ -2,6 +2,7 @@ plugins {
     id("newdeps.android.application")
     id("newdeps.jetbrains.kotlin.android")
     id("newdeps.android.compose")
+    id("newdeps.android.hilt")
 }
 
 android {

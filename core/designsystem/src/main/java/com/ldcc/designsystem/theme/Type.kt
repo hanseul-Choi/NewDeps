@@ -1,4 +1,4 @@
-package com.ldcc.newdeps.theme
+package com.ldcc.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package com.ldcc.newdeps.theme
+package com.ldcc.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

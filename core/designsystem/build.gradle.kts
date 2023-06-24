@@ -18,7 +18,9 @@ android {
  */
 dependencies {
 //    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)
-    api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.material3) // question : api와 implementation의 차이
     implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material.iconsExtended)
 }

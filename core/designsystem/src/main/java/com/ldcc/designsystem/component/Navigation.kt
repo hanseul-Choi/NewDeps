@@ -1,77 +1,101 @@
 package com.ldcc.designsystem.component
 
-import androidx.compose.foundation.layout.ColumnScope
+import android.graphics.drawable.Icon
+import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationRail
-import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.ldcc.designsystem.component.NewDepsNavigationDefaults.navigationBackgroundColor
+import com.ldcc.designsystem.icon.IconWrapper
 
-/**
- *  NavigationRailItem
- *
- *  @param selected 아이템 선택 여부 확인
- *  @param onClick 아이템 클릭 시 제공되는 콜백
- *  @param icon 아이템 아이콘 정보
- *  @param modifier 아이템의 Modifier
- *  @param selectedIcon 선택되었을 때, 아이콘
- *  @param enabled enable 상태 관리 변수, false이면 클릭이 안되고 disable의 UI가 표시됨
- *  @param label 아이템의 텍스트 레이블
- *  @param alwaysShowLabel 텍스트 레이블을 항상 보여줄 것인지 표기
- */
 @Composable
-fun NewDepsNavigationRailItem(
+fun NewDepsNavigationBar(
+    modifier: Modifier,
+    content: @Composable RowScope.() -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+    ) {
+        // question : 이 친구의 역할은 뭐지?
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+            thickness = 1.dp,
+        )
+
+        NavigationBar(
+            modifier = modifier,
+            tonalElevation = 0.dp, // question : 이 친구의 역할?
+            containerColor = navigationBackgroundColor(),
+            content = content,
+        )
+    }
+}
+
+@Composable
+fun RowScope.NewDepsNavigationBarItem(
     selected: Boolean,
     onClick: () -> Unit,
-    icon: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    selectedIcon: @Composable () -> Unit = icon,
+    unselectedIcon: IconWrapper,
+    selectedIcon: IconWrapper = unselectedIcon,
     enabled: Boolean = true,
-    label: @Composable (() -> Unit)? = null,
+    @StringRes labelId: Int,
     alwaysShowLabel: Boolean = true,
 ) {
-    NavigationRailItem(
+    NavigationBarItem(
         selected = selected,
         onClick = onClick,
-        icon = if (selected) selectedIcon else icon,
+        icon = {
+            val icon = if(selected) {
+                selectedIcon
+            } else {
+                unselectedIcon
+            }
+
+            when(icon) {
+                is IconWrapper.ImageVectorIcon -> Icon(
+                    imageVector = icon.imageVector,
+                    contentDescription = "icon",
+                )
+
+                is IconWrapper.DrawableResourceIcon -> Icon(
+                    painter = painterResource(id = icon.id),
+                    contentDescription = "icon"
+                )
+            }
+        },
         modifier = modifier,
         enabled = enabled,
-        label = label,
+        label = {
+            Text(
+                text = stringResource(id = labelId)
+            )
+        },
         alwaysShowLabel = alwaysShowLabel,
-        colors = NavigationRailItemDefaults.colors(
-            selectedIconColor = NewDepsNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = NewDepsNavigationDefaults.navigationContentColor(),
-            selectedTextColor = NewDepsNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = NewDepsNavigationDefaults.navigationContentColor(),
-            indicatorColor = NewDepsNavigationDefaults.navigationIndicatorColor()
-        )
     )
 }
 
-@Composable
-fun NewDepsNavigationRail(
-    modifier: Modifier = Modifier,
-    header: @Composable (ColumnScope.() -> Unit)? = null,
-    content: @Composable ColumnScope.() -> Unit,
-) {
-    NavigationRail(
-        modifier = modifier,
-        containerColor = Color.Transparent,
-        contentColor = NewDepsNavigationDefaults.navigationContentColor(),
-        header = header,
-        content = content
-    )
-}
-
-object NewDepsNavigationDefaults {
-    @Composable
-    fun navigationContentColor() = MaterialTheme.colorScheme.onSurfaceVariant
-
-    @Composable
-    fun navigationSelectedItemColor() = MaterialTheme.colorScheme.onPrimaryContainer
-
-    @Composable
-    fun navigationIndicatorColor() = MaterialTheme.colorScheme.primaryContainer
+// question : private object하면 뭐가 좋은거지? 단점은?
+private object NewDepsNavigationDefaults {
+    val navigationBackgroundColor = @Composable {
+        MaterialTheme.colorScheme.surface
+    }
 }
